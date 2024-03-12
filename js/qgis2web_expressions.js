@@ -754,17 +754,3 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
-
-
-
-function exp_label_VTGteborg_2_eval_expression(context) {
-    // SparbetBes || ', ' || _length || 'm'
-
-    var feature = context.feature;
-    
-    if (feature.properties) {
-        return (((feature.properties['SparbetBes']  + ', ') + feature.properties['_length'] ) + 'm');
-    } else {
-        return (((feature['SparbetBes']  + ', ') + feature['_length'] ) + 'm');
-    }
-}
