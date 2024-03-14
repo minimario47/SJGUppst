@@ -27,13 +27,6 @@
 
     
   <body>
-        
-<div class="container">
-  <h2>Modal Example</h2>
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-
     
         <div id="map">
         </div>
@@ -140,16 +133,10 @@
             });
         layer_GoogleSatellite_0;
 
-            /* Ta bort koden nedan om något händer*/
 
             L.control.layers(baseMaps, null, {collapsed: false}).addTo(map);
 
-            /* Kod stycket nedan lägger du till igen ifall det inte funkar 
-
-            #############################
-            ############################
-            ###########################
-        map.addLayer(layer_GoogleSatellite_0);   */
+           
 
             
         map.createPane('pane_OpenStreetMap_1');
@@ -365,10 +352,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
 
-            /* Ta bort allt inuti basemap brackets om något fel skulle ske med basemap koden
-            ##########################
-            #########################
-            */
+           
         var baseMaps = {
             "OpenStreetMap": layer_OpenStreetMap_1,
             "Google Satellite": layer_GoogleSatellite_0,
