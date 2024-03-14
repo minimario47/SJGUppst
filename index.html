@@ -21,7 +21,7 @@
             margin: 0;
         }
         </style>
-        <title>SJG</title>
+        <title>SJG KARTA</title>
     </head>
     <body>
         <div id="map">
@@ -446,33 +446,7 @@
         map.on("layerremove", function(){
             resetLabels([layer_Jrnvgsnt_2,layer_SJGSpr_3,layer_VerkstadUppstllningsplatser_4]);
         });
-//##########################################################
-            <div id="popup-overlay">
-        <div id="popup">
-            <span id="close-popup">&times;</span>
-            <h2>Välkommen till vår webbplats!</h2>
-            <p>Här kan du hitta massor av fantastisk information.</p>
-        </div>
-    </div>
 
-    //<!-- Script to handle the popup modal -->
-    <script>
-        // Function to close the popup modal
-        function closeModal() {
-            var popupOverlay = document.getElementById("popup-overlay");
-            popupOverlay.style.display = "none";
-        }
-
-        // Add an event listener to close the popup when the close button is clicked
-        document.getElementById("close-popup").addEventListener("click", function() {
-            closeModal();
-        });
-
-        // Show the popup modal when the DOM content is loaded
-        document.addEventListener("DOMContentLoaded", function() {
-            var popupOverlay = document.getElementById("popup-overlay");
-            popupOverlay.style.display = "flex";
-        });
             
         </script>
     </body>
