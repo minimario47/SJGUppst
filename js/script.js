@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+
     var popupOverlay = document.getElementById("popup-overlay");
     var closeButton = document.getElementById("close-popup");
 
@@ -9,4 +9,4 @@ document.addEventListener("DOMContentLoaded", function() {
     closeButton.addEventListener("click", function() {
         popupOverlay.style.display = "none";
     });
-});
+
