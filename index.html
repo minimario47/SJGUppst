@@ -60,14 +60,17 @@
             zoomControl:true, maxZoom:21, minZoom:1
         }).fitBounds([[57.70955995209214,11.97505312034646],[57.711500481526855,11.981303893505633]]);
 
-            // Skapa ett innehåll för popupen med den information du vill visa
-var popupContent = "<p>Välkommen till vår interaktiva karta! Här kan du utforska olika platser och funktioner.</p><p>Klicka på kartlagren i det övre vänstra hörnet för att välja vilka lager som ska visas.</p>";
-
-// Skapa en Leaflet-popup med det angivna innehållet
-var popup = L.popup().setContent(popupContent);
-
-// Öppna popupen på kartan när sidan laddas
-popup.setLatLng(map.getCenter()).openOn(map);
+            /* My modal koden 
+            ##################
+            #################
+            */
+            <div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Välkommen till vår interaktiva karta! Här kan du utforska olika platser och funktioner.</p>
+    <p>Klicka på kartlagren i det övre vänstra hörnet för att välja vilka lager som ska visas.</p>
+  </div>
+</div>
 
             
             var hash = new L.Hash(map);
