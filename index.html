@@ -461,8 +461,33 @@
         });
 
         </script>
-        <script>
-    alert('test');
-</script>
+        <!-- Din befintliga JavaScript-kod -->
+    <script>
+        // Hämta modal-elementet
+        var modal = document.getElementById("myModal");
+
+        // Hämta knappen som öppnar modalen
+        var btn = document.getElementById("myBtn");
+
+        // Hämta <span> elementet som stänger modalen
+        var span = document.getElementsByClassName("close")[0];
+
+        // När användaren klickar utanför modalen, stäng den
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Visa modal när sidan laddas
+        window.onload = function() {
+            modal.style.display = "block";
+        }
+
+        // När användaren klickar på stängknappen, stäng modalen
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    </script>
     </body>
 </html>
