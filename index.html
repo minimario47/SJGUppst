@@ -24,14 +24,6 @@
         <title>SJG KARTA</title>
     </head>
 
-    <!-- Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal innehåll -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Här kan du lägga till din modal-innehållstext eller HTML.</p>
-  </div>
-</div>
 
     
     <body>
@@ -461,33 +453,34 @@
         });
 
         </script>
-        <!-- Din befintliga JavaScript-kod -->
-    <script>
-        // Hämta modal-elementet
-        var modal = document.getElementById("myModal");
+        <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Open modal
+</button>
 
-        // Hämta knappen som öppnar modalen
-        var btn = document.getElementById("myBtn");
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-        // Hämta <span> elementet som stänger modalen
-        var span = document.getElementsByClassName("close")[0];
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
 
-        // När användaren klickar utanför modalen, stäng den
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
 
-        // Visa modal när sidan laddas
-        window.onload = function() {
-            modal.style.display = "block";
-        }
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
 
-        // När användaren klickar på stängknappen, stäng modalen
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-    </script>
+    </div>
+  </div>
+</div>
     </body>
 </html>
