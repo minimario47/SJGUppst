@@ -60,6 +60,43 @@
 	}
 
 
+/* Modal */
+.modal {
+  display: none; /* Göm modal som standard */
+  position: fixed; /* Lägg den överallt på sidan */
+  z-index: 1; /* Lägg den över allt annat */
+  left: 0;
+  top: 0;
+  width: 50%; /* Full bredd */
+  height: 50%; /* Full höjd */
+  overflow: auto; /* Aktivera scrollbarar om det behövs */
+  background-color: rgb(0,0,0); /* Fallback färg */
+  background-color: rgba(0,0,0,0.4); /* Svart bakgrund med lite opacitet */
+}
+
+/* Modal innehåll */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* Centrera vertikalt och horisontellt */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Anpassa bredden efter behov */
+}
+
+/* Stängknappen */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 
