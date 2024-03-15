@@ -10,18 +10,28 @@
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
-        
+
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
-<style>
-    /* Custom CSS for modal */
-    .modal-dialog {
-      margin: 15% auto; /* Adjust vertical alignment */
-    }
-    .modal-content {
-      background-color: rgba(0, 0, 0, 0.5); /* Darken background */
-    }
-  </style>
+       <style>
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+/* Använd Times New Roman som det önskade typsnittet */
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+               }
+           </style>
         <style>
         html, body, #map {
             width: 100%;
@@ -30,14 +40,67 @@
             margin: 0;
         }
         </style>
+        <style>
+    #layerPanel {
+        position: fixed;
+        top: 200px; /* Justera toppositionen för att placera fliken längre ner */
+        left: calc(100vw - 240px);
+        background-color: #fff;
+        padding: 10px;
+        border: 0px solid #ccc;
+        z-index: 1000;
+        max-height: 300px; /* Justera maximal höjd för att undvika överlappning */
+                overflow-y: auto;
+        overflow-y: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    }
+    #layerPanel h3 {
+        margin-top: 0;
+    }
+    .list-group-item {
+        cursor: pointer;
+    }
+</style>
+<style>
+#popupButton {
+    position: fixed;
+    top: 20px; /* Justera önskad position från toppen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9); /* Justera sista värdet för att ändra genomskinligheten */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1001; /* Sätt z-index till ett högre värde än Leaflet-kartan */
+}
+</style>
+<style>
+#popup {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: rgba(255, 255, 255, 0.9); /* Genomskinlig bakgrund */
+   padding: 20px;
+   border: 0px solid black;
+   z-index: 1000;
+   display: none; /* Dölj popupen initialt */
+}
+        </style>
+
         <title>SJG KARTAN</title>
     </head>
 
-    
+
    <body>
+     <button id="popupButton" onclick="togglePopup()">NYTTIG INFO</button>
 
+<div id="popup">
+    <!-- Din popup-innehåll här -->
+    Detta är innehållet i popupfönstret.
+</div>
 
-    
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -55,15 +118,35 @@
         <script src="data/Jrnvgsnt_2.js"></script>
         <script src="data/SJGSpr_3.js"></script>
         <script src="data/VerkstadUppstllningsplatser_4.js"></script>
-        
 
-        
+
+        <div id="layerPanel">
+    <h3>Välj lager</h3>
+    <div class="list-group">
+        <a href="#" class="list-group-item" onclick="focusLocation('G - Personbangård')">G - Personbangård</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('O - Gruppen')">O - Gruppen</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('G - Motorvagnshallen')">G - Motorvagnshallen</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Signal 113')">Signal 113</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Tvätten')">Tvätten</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Fekalietömning')">Fekalietömning</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Spår 0')">Spår 0</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Icko Clean')">Icko Clean</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Sävenäshallen')">Sävenäshallen</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Sävenäs Rangerbangård')">Sävenäs Rangerbangård</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Sävenäs Koloniområde')">Sävenäs Koloniområde</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Falköping Motorvagnshallen')">Falköping Motorvagnshallen</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Falköpings Bangård')">Falköpings Bangård</a>
+        <a href="#" class="list-group-item" onclick="focusLocation('Lidköpings Bangård')">Lidköpings Bangård</a>
+        <!-- Lägg till fler lager här enligt samma mönster -->
+    </div>
+</div>
+
 
         <script>
 
-            
+
         var highlightLayer;
-           
+
         function highlightFeature(e) {
             highlightLayer = e.target;
 
@@ -83,11 +166,11 @@
             zoomControl:true, maxZoom:21, minZoom:1
         }).fitBounds([[57.70955995209214,11.97505312034646],[57.711500481526855,11.981303893505633]]);
 
-        
 
 
 
-            
+
+
             var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/minimario47/SJGUppst" target="_blank">Mikail Yenigün</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -131,7 +214,7 @@
         }
         map.createPane('pane_GoogleSatellite_0');
         map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
-        
+
             var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                 pane: 'pane_GoogleSatellite_0',
                 opacity: 1.0,
@@ -144,11 +227,11 @@
         layer_GoogleSatellite_0;
 
 
-            L.control.layers(baseMaps, null, {collapsed: false}).addTo(map);
+            //L.control.layers(baseMaps, null, {collapsed: false}).addTo(map);
 
-           
 
-            
+
+
         map.createPane('pane_OpenStreetMap_1');
         map.getPane('pane_OpenStreetMap_1').style.zIndex = 401;
         var layer_OpenStreetMap_1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -256,8 +339,8 @@
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 3.0,
-                fillOpacity: 0,
+                weight: 6.0,
+                fillOpacity: 0.4,
                 interactive: true,
             }
         }
@@ -299,7 +382,7 @@
                         <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 4000});
             var popup = layer.getPopup();
             var content = popup.getContent();
             var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
@@ -308,10 +391,11 @@
 
         var pattern_VerkstadUppstllningsplatser_4_0 = new L.StripePattern({
             weight: 0.3,
-            spaceWeight: 2.0,
+            spaceWeight: 0.0,
             color: '#000000',
             opacity: 1.0,
             spaceOpacity: 0,
+            fillOpacity: 0,
             angle: 315
         });
         pattern_VerkstadUppstllningsplatser_4_0.addTo(map);
@@ -321,7 +405,7 @@
                 stroke: false,
                 fillOpacity: 1,
                 fillPattern: pattern_VerkstadUppstllningsplatser_4_0,
-                interactive: true,
+                interactive: false,
             }
         }
         function style_VerkstadUppstllningsplatser_4_1() {
@@ -333,7 +417,7 @@
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 2.0,
-                fillOpacity: 0,
+                fillOpacity: 0.1,
                 interactive: true,
             }
         }
@@ -362,12 +446,14 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
 
-           
+
+
         var baseMaps = {
-            "OpenStreetMap": layer_OpenStreetMap_1,
-            "Google Satellite": layer_GoogleSatellite_0,
-        };
-            
+    "Google Satellite": layer_GoogleSatellite_0,
+    "OpenStreetMap": layer_OpenStreetMap_1,
+};
+
+
         L.control.layers(baseMaps,{'<img src="legend/VerkstadUppstllningsplatser_4.png" /> Verkstad/ Uppställningsplatser': layer_VerkstadUppstllningsplatser_4,'<img src="legend/SJGSpr_3.png" /> SJG Spår': layer_SJGSpr_3,'<img src="legend/Jrnvgsnt_2.png" /> Järnvägsnät': layer_Jrnvgsnt_2,},{collapsed:false}).addTo(map);
         map.on("zoomend", function(){
 
@@ -454,9 +540,46 @@
             resetLabels([layer_Jrnvgsnt_2,layer_SJGSpr_3,layer_VerkstadUppstllningsplatser_4]);
         });
 
+        // Function to focus map to a specific location
+            function focusLocation(locationName) {
+                // Iterate through the features and find the one with the given name
+                layer_VerkstadUppstllningsplatser_4.eachLayer(function(layer) {
+                    if (layer.feature.properties.name === locationName) {
+                        // Set map view to the location's coordinates
+                        map.setView(layer.getBounds().getCenter(), 16);
+                        // Optionally, open a popup for the location
+                        layer.openPopup();
+                    }
+                });
+            }
+
         </script>
+        <script>
+        // Funktion för att visa popupen när knappen klickas på
+        function togglePopup() {
+            var popup = document.getElementById('popup');
+            if (popup.style.display === 'none') {
+                popup.style.display = 'block'; // Visa popupen om den är dold
+                // Lägg till händelselyssnare för att stänga popupen om användaren klickar någon annanstans
+                document.addEventListener('click', closePopupOnClickOutside);
+            } else {
+                popup.style.display = 'none'; // Dölj popupen om den är synlig
+                // Ta bort händelselyssnare för att stänga popupen
+                document.removeEventListener('click', closePopupOnClickOutside);
+            }
+        }
+
+        // Funktion för att stänga popupen om användaren klickar någon annanstans på sidan
+        function closePopupOnClickOutside(event) {
+            var popup = document.getElementById('popup');
+            if (!event.target.matches('#popupButton') && !popup.contains(event.target)) {
+                popup.style.display = 'none';
+                document.removeEventListener('click', closePopupOnClickOutside);
+            }
+        }
+
+                </script>
 
 
-        
     </body>
 </html>
