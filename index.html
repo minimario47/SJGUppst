@@ -25,7 +25,6 @@ h6 {
     font-weight: normal;
 }
 
-/* Använd Times New Roman som det önskade typsnittet */
 body {
     font-family: 'Times New Roman', Times, serif;
 }
@@ -43,13 +42,13 @@ body {
         <style>
     #layerPanel {
         position: fixed;
-        top: 200px; /* Justera toppositionen för att placera fliken längre ner */
+        top: 200px; 
         left: calc(100vw - 240px);
         background-color: #fff;
         padding: 10px;
         border: 0px solid #ccc;
         z-index: 1000;
-        max-height: 300px; /* Justera maximal höjd för att undvika överlappning */
+        max-height: 300px; 
                 overflow-y: auto;
         overflow-y: auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0);
@@ -64,15 +63,15 @@ body {
 <style>
 #popupButton {
     position: fixed;
-    top: 20px; /* Justera önskad position från toppen */
+    top: 20px; 
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.9); /* Justera sista värdet för att ändra genomskinligheten */
+    background-color: rgba(255, 255, 255, 0.9); 
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 1001; /* Sätt z-index till ett högre värde än Leaflet-kartan */
+    z-index: 1001; 
 }
 </style>
 <style>
@@ -81,11 +80,11 @@ body {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: rgba(255, 255, 255, 0.9); /* Genomskinlig bakgrund */
+   background-color: rgba(255, 255, 255, 0.9); 
    padding: 20px;
    border: 0px solid black;
    z-index: 1000;
-   display: none; /* Dölj popupen initialt */
+   display: none; 
 }
         </style>
 
@@ -137,7 +136,7 @@ body {
         <a href="#" class="list-group-item" onclick="focusLocation('Falköping Motorvagnshallen')">Falköping Motorvagnshallen</a>
         <a href="#" class="list-group-item" onclick="focusLocation('Falköpings Bangård')">Falköpings Bangård</a>
         <a href="#" class="list-group-item" onclick="focusLocation('Lidköpings Bangård')">Lidköpings Bangård</a>
-        <!-- Lägg till fler lager här enligt samma mönster -->
+        
     </div>
 </div>
 
@@ -540,14 +539,12 @@ body {
             resetLabels([layer_Jrnvgsnt_2,layer_SJGSpr_3,layer_VerkstadUppstllningsplatser_4]);
         });
 
-        // Function to focus map to a specific location
+      
             function focusLocation(locationName) {
-                // Iterate through the features and find the one with the given name
+                
                 layer_VerkstadUppstllningsplatser_4.eachLayer(function(layer) {
                     if (layer.feature.properties.name === locationName) {
-                        // Set map view to the location's coordinates
                         map.setView(layer.getBounds().getCenter(), 16);
-                        // Optionally, open a popup for the location
                         layer.openPopup();
                     }
                 });
@@ -555,21 +552,17 @@ body {
 
         </script>
         <script>
-        // Funktion för att visa popupen när knappen klickas på
         function togglePopup() {
             var popup = document.getElementById('popup');
             if (popup.style.display === 'none') {
-                popup.style.display = 'block'; // Visa popupen om den är dold
-                // Lägg till händelselyssnare för att stänga popupen om användaren klickar någon annanstans
+                popup.style.display = 'block';
                 document.addEventListener('click', closePopupOnClickOutside);
             } else {
-                popup.style.display = 'none'; // Dölj popupen om den är synlig
-                // Ta bort händelselyssnare för att stänga popupen
+                popup.style.display = 'none'; 
                 document.removeEventListener('click', closePopupOnClickOutside);
             }
         }
 
-        // Funktion för att stänga popupen om användaren klickar någon annanstans på sidan
         function closePopupOnClickOutside(event) {
             var popup = document.getElementById('popup');
             if (!event.target.matches('#popupButton') && !popup.contains(event.target)) {
