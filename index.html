@@ -42,13 +42,13 @@ body {
         <style>
     #layerPanel {
         position: fixed;
-        top: 200px; 
+        top: 200px;
         left: calc(100vw - 240px);
         background-color: #fff;
         padding: 10px;
         border: 0px solid #ccc;
         z-index: 1000;
-        max-height: 300px; 
+        max-height: 300px;
                 overflow-y: auto;
         overflow-y: auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0);
@@ -63,15 +63,15 @@ body {
 <style>
 #popupButton {
     position: fixed;
-    top: 20px; 
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.95); 
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 10px 20px;
     border: 2px solid red;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 1001; 
+    z-index: 1001;
 }
 </style>
 <style>
@@ -80,11 +80,12 @@ body {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: rgba(255, 255, 255, 0.95); 
+   background-color: rgba(255, 255, 255, 0.97);
    padding: 20px;
    border: 2px solid red;
    z-index: 1000;
-   display: none; 
+   display: none;
+   // ändra till block för att göra synlig vid start
 }
         </style>
 
@@ -122,7 +123,7 @@ body {
   <li>Mätverktyget kan användas för att mäta avstånd.</li>
   <li>Söksymbolen gör det möjligt att söka efter specifika platser eller adresser i kartan.</li>
 </ul>
-.
+<p><a href="mailto:mikail.yeniguen@sj.se?subject=SJG Kartan">Tryck här och dela din feedback via e-post!📩</a></p>
 </div>
 
         <div id="map">
@@ -161,7 +162,7 @@ body {
         <a href="#" class="list-group-item" onclick="focusLocation('Falköping Motorvagnshallen')">Falköping Motorvagnshallen</a>
         <a href="#" class="list-group-item" onclick="focusLocation('Falköpings Bangård')">Falköpings Bangård</a>
         <a href="#" class="list-group-item" onclick="focusLocation('Lidköpings Bangård')">Lidköpings Bangård</a>
-        
+
     </div>
 </div>
 
@@ -268,7 +269,7 @@ body {
             maxNativeZoom: 19
         });
         layer_OpenStreetMap_1;
-        map.addLayer(layer_OpenStreetMap_1);
+        map.addLayer(layer_GoogleSatellite_0);
         function pop_Jrnvgsnt_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -564,9 +565,9 @@ body {
             resetLabels([layer_Jrnvgsnt_2,layer_SJGSpr_3,layer_VerkstadUppstllningsplatser_4]);
         });
 
-      
+
             function focusLocation(locationName) {
-                
+
                 layer_VerkstadUppstllningsplatser_4.eachLayer(function(layer) {
                     if (layer.feature.properties.name === locationName) {
                         map.setView(layer.getBounds().getCenter(), 16);
@@ -577,13 +578,15 @@ body {
 
         </script>
         <script>
+
         function togglePopup() {
             var popup = document.getElementById('popup');
+
             if (popup.style.display === 'none') {
                 popup.style.display = 'block';
                 document.addEventListener('click', closePopupOnClickOutside);
             } else {
-                popup.style.display = 'none'; 
+                popup.style.display = 'none';
                 document.removeEventListener('click', closePopupOnClickOutside);
             }
         }
@@ -595,9 +598,13 @@ body {
                 document.removeEventListener('click', closePopupOnClickOutside);
             }
         }
+        window.onload = function() {
+    togglePopup();
+  };
+
+
 
                 </script>
 
-
-    </body>
 </html>
+
